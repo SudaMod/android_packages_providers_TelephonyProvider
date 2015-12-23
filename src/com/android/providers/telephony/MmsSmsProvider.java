@@ -1636,8 +1636,10 @@ public class MmsSmsProvider extends ContentProvider {
             case URI_CONVERSATIONS: {
                 final ContentValues finalValues = new ContentValues(1);
                 if (values.containsKey(Threads.ARCHIVED)) {
-                    // Only allow update archived
                     finalValues.put(Threads.ARCHIVED, values.getAsBoolean(Threads.ARCHIVED));
+                }
+                if (values.containsKey(Threads.NOTIFICATION_MESSAGE)) {
+                    finalValues.put(Threads.NOTIFICATION_MESSAGE, values.getAsBoolean(Threads.NOTIFICATION_MESSAGE));
                 }
                 affectedRows = db.update(TABLE_THREADS, finalValues, selection, selectionArgs);
                 break;
